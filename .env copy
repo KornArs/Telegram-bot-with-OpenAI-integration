@@ -1,0 +1,16 @@
+# Конфигурация для Telegram-бота с оплатой и проксированием в Make
+
+# Токен бота от @BotFather
+BOT_TOKEN=8374231368:AAG8w62LtQaJou5-ErKU9GxwQSTr_B_5ToE
+
+# ID чата администратора для уведомлений об оплате
+ADMIN_CHAT_ID=6791029862
+
+# Время debounce в секундах (защита от флуда)
+DEBOUNCE_SECONDS=6
+
+# Максимальное время ожидания в секундах
+MAX_WAIT_SECONDS=15
+
+# URL webhook для проксирования событий в Make
+MAKE_WEBHOOK_URL=https://hook.eu2.make.com/oaceeu84fkaz39j9xur64b4x742x7ef7

@@ -1,0 +1,1286 @@
+{
+    "name": "Test",
+    "flow": [
+        {
+            "id": 34,
+            "module": "gateway:CustomWebHook",
+            "version": 1,
+            "parameters": {
+                "hook": 3134493,
+                "maxResults": 1
+            },
+            "mapper": {},
+            "metadata": {
+                "designer": {
+                    "x": 0,
+                    "y": 300
+                },
+                "restore": {
+                    "parameters": {
+                        "hook": {
+                            "data": {
+                                "editable": "true"
+                            },
+                            "label": "webhook Урок 04-09-2025 Ковчег"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "hook",
+                        "type": "hook:gateway-webhook",
+                        "label": "Webhook",
+                        "required": true
+                    },
+                    {
+                        "name": "maxResults",
+                        "type": "number",
+                        "label": "Maximum number of results"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 29,
+            "module": "datastore:GetRecord",
+            "version": 1,
+            "parameters": {
+                "datastore": 50628
+            },
+            "mapper": {
+                "key": "{{34.user_id}}",
+                "returnWrapped": false
+            },
+            "metadata": {
+                "designer": {
+                    "x": 300,
+                    "y": 300
+                },
+                "restore": {
+                    "parameters": {
+                        "datastore": {
+                            "label": "Бизнес бот"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "datastore",
+                        "type": "datastore",
+                        "label": "Data store",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "key",
+                        "type": "text",
+                        "label": "Key",
+                        "required": true
+                    },
+                    {
+                        "name": "returnWrapped",
+                        "type": "boolean",
+                        "label": "Return Wrapped Output",
+                        "required": true
+                    }
+                ],
+                "interface": [
+                    {
+                        "help": "",
+                        "name": "ID",
+                        "type": "text",
+                        "label": null,
+                        "default": null,
+                        "required": false,
+                        "multiline": false
+                    },
+                    {
+                        "help": "",
+                        "name": "Name",
+                        "type": "text",
+                        "label": null,
+                        "default": null,
+                        "required": false,
+                        "multiline": false
+                    },
+                    {
+                        "help": "",
+                        "name": "thread_id",
+                        "type": "text",
+                        "label": null,
+                        "default": null,
+                        "required": false,
+                        "multiline": false
+                    },
+                    {
+                        "help": "",
+                        "name": "First Name",
+                        "type": "text",
+                        "label": null,
+                        "default": null,
+                        "required": false,
+                        "multiline": false
+                    },
+                    {
+                        "help": "",
+                        "name": "Last Name",
+                        "type": "text",
+                        "label": null,
+                        "default": null,
+                        "required": false,
+                        "multiline": false
+                    },
+                    {
+                        "help": "",
+                        "name": "User Name",
+                        "type": "text",
+                        "label": null,
+                        "default": null,
+                        "required": false,
+                        "multiline": false
+                    }
+                ]
+            }
+        },
+        {
+            "id": 12,
+            "module": "builtin:BasicRouter",
+            "version": 1,
+            "mapper": null,
+            "metadata": {
+                "designer": {
+                    "x": 600,
+                    "y": 300
+                }
+            },
+            "routes": [
+                {
+                    "flow": [
+                        {
+                            "id": 18,
+                            "module": "openai-gpt-3:messageAssistantAdvanced",
+                            "version": 1,
+                            "parameters": {
+                                "__IMTCONN__": 5226686
+                            },
+                            "filter": {
+                                "name": "Существующий юзер",
+                                "conditions": [
+                                    [
+                                        {
+                                            "a": "{{29.ID}}",
+                                            "o": "exist"
+                                        }
+                                    ]
+                                ]
+                            },
+                            "mapper": {
+                                "role": "user",
+                                "message": "{{34.total_text}}",
+                                "threadId": "{{29.thread_id}}",
+                                "assistantId": "asst_izlARK87Cdw9yMPJsK20SIHi",
+                                "response_format": "json_object",
+                                "parseJSONResponse": true
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 900,
+                                    "y": 150
+                                },
+                                "restore": {
+                                    "expect": {
+                                        "role": {
+                                            "label": "User"
+                                        },
+                                        "model": {
+                                            "mode": "chose"
+                                        },
+                                        "tools": {
+                                            "mode": "edit"
+                                        },
+                                        "image_urls": {
+                                            "mode": "chose"
+                                        },
+                                        "assistantId": {
+                                            "mode": "chose",
+                                            "label": "Урок 04-09-2025 Ковчег (gpt-4.1)",
+                                            "nested": []
+                                        },
+                                        "image_files": {
+                                            "mode": "chose"
+                                        },
+                                        "tool_choice": {
+                                            "mode": "edit"
+                                        },
+                                        "response_format": {
+                                            "mode": "chose",
+                                            "label": "JSON Object"
+                                        },
+                                        "parseJSONResponse": {
+                                            "mode": "chose"
+                                        },
+                                        "truncation_strategy": {
+                                            "mode": "chose",
+                                            "label": "Empty"
+                                        },
+                                        "file_search_resources": {
+                                            "mode": "edit"
+                                        },
+                                        "code_interpreter_resources": {
+                                            "mode": "edit"
+                                        }
+                                    },
+                                    "parameters": {
+                                        "__IMTCONN__": {
+                                            "data": {
+                                                "scoped": "true",
+                                                "connection": "openai-gpt-3"
+                                            },
+                                            "label": "Агентология"
+                                        }
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "__IMTCONN__",
+                                        "type": "account:openai-gpt-3",
+                                        "label": "Connection",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "assistantId",
+                                        "type": "select",
+                                        "label": "Assistant",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "role",
+                                        "type": "select",
+                                        "label": "Role",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                "user",
+                                                "assistant"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "threadId",
+                                        "type": "text",
+                                        "label": "Thread ID"
+                                    },
+                                    {
+                                        "name": "model",
+                                        "type": "select",
+                                        "label": "Model"
+                                    },
+                                    {
+                                        "name": "tools",
+                                        "type": "select",
+                                        "label": "Tools",
+                                        "multiple": true,
+                                        "validate": {
+                                            "enum": [
+                                                "file_search",
+                                                "code_interpreter"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "file_search_resources",
+                                        "type": "select",
+                                        "label": "File Search Resources"
+                                    },
+                                    {
+                                        "name": "code_interpreter_resources",
+                                        "type": "select",
+                                        "label": "Code Interpreter Resources",
+                                        "multiple": true,
+                                        "validate": {
+                                            "maxItems": 20
+                                        }
+                                    },
+                                    {
+                                        "name": "tool_choice",
+                                        "type": "select",
+                                        "label": "Tool Choice",
+                                        "validate": {
+                                            "enum": [
+                                                "none",
+                                                "auto",
+                                                "required",
+                                                "file_search",
+                                                "code_interpreter",
+                                                "function"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "instructions",
+                                        "type": "text",
+                                        "label": "Instructions"
+                                    },
+                                    {
+                                        "name": "max_prompt_tokens",
+                                        "type": "uinteger",
+                                        "label": "Max Prompt Tokens"
+                                    },
+                                    {
+                                        "name": "max_completion_tokens",
+                                        "type": "uinteger",
+                                        "label": "Max Completion Tokens"
+                                    },
+                                    {
+                                        "name": "temperature",
+                                        "type": "number",
+                                        "label": "Temperature",
+                                        "validate": {
+                                            "max": 2,
+                                            "min": 0
+                                        }
+                                    },
+                                    {
+                                        "name": "top_p",
+                                        "type": "number",
+                                        "label": "Top P",
+                                        "validate": {
+                                            "max": 1,
+                                            "min": 0
+                                        }
+                                    },
+                                    {
+                                        "name": "response_format",
+                                        "type": "select",
+                                        "label": "Response Format",
+                                        "validate": {
+                                            "enum": [
+                                                "auto",
+                                                "json_object",
+                                                "text"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "truncation_strategy",
+                                        "type": "select",
+                                        "label": "Truncation Strategy",
+                                        "validate": {
+                                            "enum": [
+                                                "auto",
+                                                "last_messages"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "message",
+                                        "type": "text",
+                                        "label": "Message",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "image_files",
+                                        "type": "select",
+                                        "label": "Image Files",
+                                        "multiple": true
+                                    },
+                                    {
+                                        "name": "image_urls",
+                                        "spec": {
+                                            "name": "value",
+                                            "type": "url",
+                                            "label": "Image URL",
+                                            "required": true
+                                        },
+                                        "type": "array",
+                                        "label": "Image URLs"
+                                    },
+                                    {
+                                        "name": "parseJSONResponse",
+                                        "type": "boolean",
+                                        "label": "Parse JSON Response",
+                                        "required": true
+                                    }
+                                ],
+                                "advanced": true
+                            }
+                        },
+                        {
+                            "id": 14,
+                            "module": "builtin:BasicRouter",
+                            "version": 1,
+                            "mapper": null,
+                            "metadata": {
+                                "designer": {
+                                    "x": 1200,
+                                    "y": 150
+                                }
+                            },
+                            "routes": [
+                                {
+                                    "flow": [
+                                        {
+                                            "id": 15,
+                                            "module": "telegram:SendReplyMessage",
+                                            "version": 1,
+                                            "parameters": {
+                                                "__IMTCONN__": 11296305
+                                            },
+                                            "filter": {
+                                                "name": "Reply",
+                                                "conditions": [
+                                                    [
+                                                        {
+                                                            "a": "{{18.result.action}}",
+                                                            "b": "reply",
+                                                            "o": "text:equal"
+                                                        }
+                                                    ]
+                                                ]
+                                            },
+                                            "mapper": {
+                                                "text": "{{18.result.reply_text}}",
+                                                "chatId": "{{34.user_id}}",
+                                                "parseMode": "",
+                                                "replyMarkup": "",
+                                                "messageThreadId": "",
+                                                "replyToMessageId": "",
+                                                "replyMarkupAssembleType": "reply_markup_enter"
+                                            },
+                                            "metadata": {
+                                                "designer": {
+                                                    "x": 1500,
+                                                    "y": 0
+                                                },
+                                                "restore": {
+                                                    "expect": {
+                                                        "parseMode": {
+                                                            "label": "Empty"
+                                                        },
+                                                        "disableNotification": {
+                                                            "mode": "chose"
+                                                        },
+                                                        "replyMarkupAssembleType": {
+                                                            "label": "Enter the Reply Markup"
+                                                        }
+                                                    },
+                                                    "parameters": {
+                                                        "__IMTCONN__": {
+                                                            "data": {
+                                                                "scoped": "true",
+                                                                "connection": "telegram"
+                                                            },
+                                                            "label": "Урок 04-09-2025 Ковчег"
+                                                        }
+                                                    }
+                                                },
+                                                "parameters": [
+                                                    {
+                                                        "name": "__IMTCONN__",
+                                                        "type": "account:telegram",
+                                                        "label": "Connection",
+                                                        "required": true
+                                                    }
+                                                ],
+                                                "expect": [
+                                                    {
+                                                        "name": "chatId",
+                                                        "type": "text",
+                                                        "label": "Chat ID",
+                                                        "required": true
+                                                    },
+                                                    {
+                                                        "name": "text",
+                                                        "type": "text",
+                                                        "label": "Text",
+                                                        "required": true
+                                                    },
+                                                    {
+                                                        "name": "messageThreadId",
+                                                        "type": "number",
+                                                        "label": "Message Thread ID"
+                                                    },
+                                                    {
+                                                        "name": "parseMode",
+                                                        "type": "select",
+                                                        "label": "Parse Mode",
+                                                        "validate": {
+                                                            "enum": [
+                                                                "Markdown",
+                                                                "HTML"
+                                                            ]
+                                                        }
+                                                    },
+                                                    {
+                                                        "name": "disableNotification",
+                                                        "type": "boolean",
+                                                        "label": "Disable Notifications"
+                                                    },
+                                                    {
+                                                        "name": "disableWebPagePreview",
+                                                        "type": "boolean",
+                                                        "label": "Disable Link Previews"
+                                                    },
+                                                    {
+                                                        "name": "replyToMessageId",
+                                                        "type": "number",
+                                                        "label": "Original Message ID"
+                                                    },
+                                                    {
+                                                        "name": "replyMarkupAssembleType",
+                                                        "type": "select",
+                                                        "label": "Enter/Assemble the Reply Markup Field",
+                                                        "validate": {
+                                                            "enum": [
+                                                                "reply_markup_enter",
+                                                                "reply_markup_assemble"
+                                                            ]
+                                                        }
+                                                    },
+                                                    {
+                                                        "name": "replyMarkup",
+                                                        "type": "text",
+                                                        "label": "Reply Markup"
+                                                    }
+                                                ],
+                                                "advanced": true
+                                            }
+                                        }
+                                    ]
+                                },
+                                {
+                                    "flow": [
+                                        {
+                                            "id": 4,
+                                            "module": "telegram:SendInvoice",
+                                            "version": 1,
+                                            "parameters": {
+                                                "__IMTCONN__": 11296305
+                                            },
+                                            "filter": {
+                                                "name": "Offer mentorship",
+                                                "conditions": [
+                                                    [
+                                                        {
+                                                            "a": "{{18.result.action}}",
+                                                            "b": "offer_mentorship",
+                                                            "o": "text:equal"
+                                                        }
+                                                    ]
+                                                ]
+                                            },
+                                            "mapper": {
+                                                "title": "Запись на консультацию",
+                                                "chatId": "{{34.user_id}}",
+                                                "prices": [
+                                                    {
+                                                        "label": "К оплате",
+                                                        "amount": "990000"
+                                                    }
+                                                ],
+                                                "payload": "10",
+                                                "currency": "RUB",
+                                                "photoUrl": "",
+                                                "description": "{{18.result.reply_text}}",
+                                                "replyMarkup": "",
+                                                "maxTipAmount": "",
+                                                "providerData": "",
+                                                "providerToken": "381764678:TEST:139722",
+                                                "startParameter": "",
+                                                "messageThreadId": "",
+                                                "replyToMessageId": "",
+                                                "suggestedTipAmounts": [],
+                                                "replyMarkupAssembleType": "reply_markup_enter"
+                                            },
+                                            "metadata": {
+                                                "designer": {
+                                                    "x": 1500,
+                                                    "y": 300
+                                                },
+                                                "restore": {
+                                                    "expect": {
+                                                        "prices": {
+                                                            "items": [
+                                                                null
+                                                            ]
+                                                        },
+                                                        "replyMarkupAssembleType": {
+                                                            "label": "Enter the Reply Markup"
+                                                        }
+                                                    },
+                                                    "parameters": {
+                                                        "__IMTCONN__": {
+                                                            "data": {
+                                                                "scoped": "true",
+                                                                "connection": "telegram"
+                                                            },
+                                                            "label": "Урок 04-09-2025 Ковчег"
+                                                        }
+                                                    }
+                                                },
+                                                "parameters": [
+                                                    {
+                                                        "name": "__IMTCONN__",
+                                                        "type": "account:telegram",
+                                                        "label": "Connection",
+                                                        "required": true
+                                                    }
+                                                ],
+                                                "expect": [
+                                                    {
+                                                        "name": "chatId",
+                                                        "type": "text",
+                                                        "label": "Chat ID",
+                                                        "required": true
+                                                    },
+                                                    {
+                                                        "name": "title",
+                                                        "type": "text",
+                                                        "label": "Title",
+                                                        "required": true,
+                                                        "validate": {
+                                                            "max": 32,
+                                                            "min": 1
+                                                        }
+                                                    },
+                                                    {
+                                                        "name": "description",
+                                                        "type": "text",
+                                                        "label": "Description",
+                                                        "required": true,
+                                                        "validate": {
+                                                            "max": 255,
+                                                            "min": 1
+                                                        }
+                                                    },
+                                                    {
+                                                        "name": "payload",
+                                                        "type": "text",
+                                                        "label": "Payload",
+                                                        "required": true
+                                                    },
+                                                    {
+                                                        "name": "providerToken",
+                                                        "type": "text",
+                                                        "label": "Provider Token",
+                                                        "required": true
+                                                    },
+                                                    {
+                                                        "name": "currency",
+                                                        "type": "text",
+                                                        "label": "Currency",
+                                                        "required": true
+                                                    },
+                                                    {
+                                                        "name": "prices",
+                                                        "spec": [
+                                                            {
+                                                                "name": "label",
+                                                                "type": "text",
+                                                                "label": "Label",
+                                                                "required": true
+                                                            },
+                                                            {
+                                                                "name": "amount",
+                                                                "type": "integer",
+                                                                "label": "Amount",
+                                                                "required": true
+                                                            }
+                                                        ],
+                                                        "type": "array",
+                                                        "label": "Prices",
+                                                        "required": true
+                                                    },
+                                                    {
+                                                        "name": "maxTipAmount",
+                                                        "type": "integer",
+                                                        "label": "Max Tip Amount"
+                                                    },
+                                                    {
+                                                        "name": "suggestedTipAmounts",
+                                                        "spec": {
+                                                            "name": "value",
+                                                            "type": "integer"
+                                                        },
+                                                        "type": "array",
+                                                        "label": "Suggested Tip Amounts",
+                                                        "validate": {
+                                                            "maxItems": 4
+                                                        }
+                                                    },
+                                                    {
+                                                        "name": "messageThreadId",
+                                                        "type": "number",
+                                                        "label": "Message Thread ID"
+                                                    },
+                                                    {
+                                                        "name": "startParameter",
+                                                        "type": "text",
+                                                        "label": "Start Parameter"
+                                                    },
+                                                    {
+                                                        "name": "providerData",
+                                                        "type": "text",
+                                                        "label": "Provider Data"
+                                                    },
+                                                    {
+                                                        "name": "photoUrl",
+                                                        "type": "url",
+                                                        "label": "Photo URL"
+                                                    },
+                                                    {
+                                                        "name": "needName",
+                                                        "type": "boolean",
+                                                        "label": "Need Name"
+                                                    },
+                                                    {
+                                                        "name": "needPhoneNumber",
+                                                        "type": "boolean",
+                                                        "label": "Need Phone Number"
+                                                    },
+                                                    {
+                                                        "name": "needEmail",
+                                                        "type": "boolean",
+                                                        "label": "Need Email"
+                                                    },
+                                                    {
+                                                        "name": "needShippingAddress",
+                                                        "type": "boolean",
+                                                        "label": "Need Shipping Address"
+                                                    },
+                                                    {
+                                                        "name": "sendPhoneNumberToProvider",
+                                                        "type": "boolean",
+                                                        "label": "Send Phone Number to Provider"
+                                                    },
+                                                    {
+                                                        "name": "sendEmailToProvider",
+                                                        "type": "boolean",
+                                                        "label": "Send Email to Provider"
+                                                    },
+                                                    {
+                                                        "name": "isFlexible",
+                                                        "type": "boolean",
+                                                        "label": "Is Flexible"
+                                                    },
+                                                    {
+                                                        "name": "disableNotification",
+                                                        "type": "boolean",
+                                                        "label": "Disable Notifications"
+                                                    },
+                                                    {
+                                                        "name": "replyToMessageId",
+                                                        "type": "number",
+                                                        "label": "Original Message ID"
+                                                    },
+                                                    {
+                                                        "name": "replyMarkupAssembleType",
+                                                        "type": "select",
+                                                        "label": "Enter/Assemble the Reply Markup Field",
+                                                        "validate": {
+                                                            "enum": [
+                                                                "reply_markup_enter",
+                                                                "reply_markup_assemble"
+                                                            ]
+                                                        }
+                                                    },
+                                                    {
+                                                        "name": "replyMarkup",
+                                                        "type": "text",
+                                                        "label": "Reply Markup"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "flow": [
+                        {
+                            "id": 25,
+                            "module": "openai-gpt-3:messageAssistantAdvanced",
+                            "version": 1,
+                            "parameters": {
+                                "__IMTCONN__": 5226686
+                            },
+                            "filter": {
+                                "name": "Новый юзер",
+                                "conditions": [
+                                    [
+                                        {
+                                            "a": "{{29.ID}}",
+                                            "o": "notexist"
+                                        }
+                                    ]
+                                ]
+                            },
+                            "mapper": {
+                                "role": "user",
+                                "model": "gpt-4o-mini",
+                                "message": "сообщение {{34.total_text}}",
+                                "assistantId": "asst_izlARK87Cdw9yMPJsK20SIHi",
+                                "temperature": "0.3",
+                                "instructions": "Ты — доброжелательный ассистент для новичков в Make.\r\n\r\nнам написал новый юзер вот его имя {{34.messages[].from.first_name}} определи имя и обращайся по имени\nпоприветствую его уточни вопрос ",
+                                "truncation_strategy": "auto"
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 900,
+                                    "y": 600
+                                },
+                                "restore": {
+                                    "expect": {
+                                        "role": {
+                                            "label": "User"
+                                        },
+                                        "model": {
+                                            "mode": "chose",
+                                            "label": "gpt-4o-mini (system)"
+                                        },
+                                        "tools": {
+                                            "mode": "edit"
+                                        },
+                                        "image_urls": {
+                                            "mode": "chose"
+                                        },
+                                        "assistantId": {
+                                            "mode": "chose",
+                                            "label": "Урок 04-09-2025 Ковчег (gpt-4.1)",
+                                            "nested": []
+                                        },
+                                        "image_files": {
+                                            "mode": "chose"
+                                        },
+                                        "tool_choice": {
+                                            "mode": "edit"
+                                        },
+                                        "response_format": {
+                                            "mode": "chose",
+                                            "label": "Empty"
+                                        },
+                                        "truncation_strategy": {
+                                            "mode": "chose",
+                                            "label": "Auto"
+                                        },
+                                        "file_search_resources": {
+                                            "mode": "edit"
+                                        },
+                                        "code_interpreter_resources": {
+                                            "mode": "edit"
+                                        }
+                                    },
+                                    "parameters": {
+                                        "__IMTCONN__": {
+                                            "data": {
+                                                "scoped": "true",
+                                                "connection": "openai-gpt-3"
+                                            },
+                                            "label": "Агентология"
+                                        }
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "__IMTCONN__",
+                                        "type": "account:openai-gpt-3",
+                                        "label": "Connection",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "assistantId",
+                                        "type": "select",
+                                        "label": "Assistant",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "role",
+                                        "type": "select",
+                                        "label": "Role",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                "user",
+                                                "assistant"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "threadId",
+                                        "type": "text",
+                                        "label": "Thread ID"
+                                    },
+                                    {
+                                        "name": "model",
+                                        "type": "select",
+                                        "label": "Model"
+                                    },
+                                    {
+                                        "name": "tools",
+                                        "type": "select",
+                                        "label": "Tools",
+                                        "multiple": true,
+                                        "validate": {
+                                            "enum": [
+                                                "file_search",
+                                                "code_interpreter"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "file_search_resources",
+                                        "type": "select",
+                                        "label": "File Search Resources"
+                                    },
+                                    {
+                                        "name": "code_interpreter_resources",
+                                        "type": "select",
+                                        "label": "Code Interpreter Resources",
+                                        "multiple": true,
+                                        "validate": {
+                                            "maxItems": 20
+                                        }
+                                    },
+                                    {
+                                        "name": "tool_choice",
+                                        "type": "select",
+                                        "label": "Tool Choice",
+                                        "validate": {
+                                            "enum": [
+                                                "none",
+                                                "auto",
+                                                "required",
+                                                "file_search",
+                                                "code_interpreter",
+                                                "function"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "instructions",
+                                        "type": "text",
+                                        "label": "Instructions"
+                                    },
+                                    {
+                                        "name": "max_prompt_tokens",
+                                        "type": "uinteger",
+                                        "label": "Max Prompt Tokens"
+                                    },
+                                    {
+                                        "name": "max_completion_tokens",
+                                        "type": "uinteger",
+                                        "label": "Max Completion Tokens"
+                                    },
+                                    {
+                                        "name": "temperature",
+                                        "type": "number",
+                                        "label": "Temperature",
+                                        "validate": {
+                                            "max": 2,
+                                            "min": 0
+                                        }
+                                    },
+                                    {
+                                        "name": "top_p",
+                                        "type": "number",
+                                        "label": "Top P",
+                                        "validate": {
+                                            "max": 1,
+                                            "min": 0
+                                        }
+                                    },
+                                    {
+                                        "name": "response_format",
+                                        "type": "select",
+                                        "label": "Response Format",
+                                        "validate": {
+                                            "enum": [
+                                                "auto",
+                                                "json_object",
+                                                "text"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "truncation_strategy",
+                                        "type": "select",
+                                        "label": "Truncation Strategy",
+                                        "validate": {
+                                            "enum": [
+                                                "auto",
+                                                "last_messages"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "message",
+                                        "type": "text",
+                                        "label": "Message",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "image_files",
+                                        "type": "select",
+                                        "label": "Image Files",
+                                        "multiple": true
+                                    },
+                                    {
+                                        "name": "image_urls",
+                                        "spec": {
+                                            "name": "value",
+                                            "type": "url",
+                                            "label": "Image URL",
+                                            "required": true
+                                        },
+                                        "type": "array",
+                                        "label": "Image URLs"
+                                    }
+                                ],
+                                "advanced": true
+                            }
+                        },
+                        {
+                            "id": 27,
+                            "module": "datastore:AddRecord",
+                            "version": 1,
+                            "parameters": {
+                                "datastore": 50628
+                            },
+                            "mapper": {
+                                "key": "{{34.user_id}}",
+                                "data": {
+                                    "ID": "{{34.user_id}}",
+                                    "Name": "",
+                                    "Last Name": "{{34.from.last_name}}",
+                                    "User Name": "{{34.from.username}}",
+                                    "thread_id": "{{25.thread_id}}",
+                                    "First Name": "{{34.from.first_name}}"
+                                },
+                                "overwrite": false
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 1200,
+                                    "y": 600
+                                },
+                                "restore": {
+                                    "expect": {
+                                        "overwrite": {
+                                            "mode": "chose"
+                                        }
+                                    },
+                                    "parameters": {
+                                        "datastore": {
+                                            "label": "Бизнес бот"
+                                        }
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "datastore",
+                                        "type": "datastore",
+                                        "label": "Data store",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "key",
+                                        "type": "text",
+                                        "label": "Key"
+                                    },
+                                    {
+                                        "name": "overwrite",
+                                        "type": "boolean",
+                                        "label": "Overwrite an existing record",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "data",
+                                        "spec": [
+                                            {
+                                                "name": "ID",
+                                                "type": "text",
+                                                "label": null
+                                            },
+                                            {
+                                                "name": "Name",
+                                                "type": "text",
+                                                "label": null
+                                            },
+                                            {
+                                                "name": "thread_id",
+                                                "type": "text",
+                                                "label": null
+                                            },
+                                            {
+                                                "name": "First Name",
+                                                "type": "text",
+                                                "label": null
+                                            },
+                                            {
+                                                "name": "Last Name",
+                                                "type": "text",
+                                                "label": null
+                                            },
+                                            {
+                                                "name": "User Name",
+                                                "type": "text",
+                                                "label": null
+                                            }
+                                        ],
+                                        "type": "collection",
+                                        "label": "Record"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "id": 26,
+                            "module": "telegram:SendReplyMessage",
+                            "version": 1,
+                            "parameters": {
+                                "__IMTCONN__": 11296305
+                            },
+                            "mapper": {
+                                "text": "{{25.result}}",
+                                "chatId": "{{34.user_id}}",
+                                "parseMode": "",
+                                "replyMarkup": "",
+                                "messageThreadId": "",
+                                "replyToMessageId": "",
+                                "replyMarkupAssembleType": "reply_markup_enter"
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 1500,
+                                    "y": 600
+                                },
+                                "restore": {
+                                    "expect": {
+                                        "parseMode": {
+                                            "label": "Empty"
+                                        },
+                                        "disableNotification": {
+                                            "mode": "chose"
+                                        },
+                                        "replyMarkupAssembleType": {
+                                            "label": "Enter the Reply Markup"
+                                        }
+                                    },
+                                    "parameters": {
+                                        "__IMTCONN__": {
+                                            "data": {
+                                                "scoped": "true",
+                                                "connection": "telegram"
+                                            },
+                                            "label": "Урок 04-09-2025 Ковчег"
+                                        }
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "__IMTCONN__",
+                                        "type": "account:telegram",
+                                        "label": "Connection",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "chatId",
+                                        "type": "text",
+                                        "label": "Chat ID",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "text",
+                                        "type": "text",
+                                        "label": "Text",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "messageThreadId",
+                                        "type": "number",
+                                        "label": "Message Thread ID"
+                                    },
+                                    {
+                                        "name": "parseMode",
+                                        "type": "select",
+                                        "label": "Parse Mode",
+                                        "validate": {
+                                            "enum": [
+                                                "Markdown",
+                                                "HTML"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "disableNotification",
+                                        "type": "boolean",
+                                        "label": "Disable Notifications"
+                                    },
+                                    {
+                                        "name": "disableWebPagePreview",
+                                        "type": "boolean",
+                                        "label": "Disable Link Previews"
+                                    },
+                                    {
+                                        "name": "replyToMessageId",
+                                        "type": "number",
+                                        "label": "Original Message ID"
+                                    },
+                                    {
+                                        "name": "replyMarkupAssembleType",
+                                        "type": "select",
+                                        "label": "Enter/Assemble the Reply Markup Field",
+                                        "validate": {
+                                            "enum": [
+                                                "reply_markup_enter",
+                                                "reply_markup_assemble"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "replyMarkup",
+                                        "type": "text",
+                                        "label": "Reply Markup"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "metadata": {
+        "instant": true,
+        "version": 1,
+        "scenario": {
+            "roundtrips": 1,
+            "maxErrors": 3,
+            "autoCommit": true,
+            "autoCommitTriggerLast": true,
+            "sequential": false,
+            "slots": null,
+            "confidential": false,
+            "dataloss": false,
+            "dlq": false,
+            "freshVariables": false
+        },
+        "designer": {
+            "orphans": []
+        },
+        "zone": "eu2.make.com",
+        "notes": []
+    }
+}
