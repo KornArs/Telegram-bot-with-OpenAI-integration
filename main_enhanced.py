@@ -6,7 +6,7 @@ import threading
 from datetime import datetime
 from typing import Dict, List, Optional
 from flask import Flask, request, jsonify
-import httpx
+from httpx import AsyncClient
 from dotenv import load_dotenv
 from telegram import Bot, Update, Message, Document, Audio, Voice
 from telegram.ext import Application, MessageHandler, filters, PreCheckoutQueryHandler
@@ -147,9 +147,10 @@ async def download_file_async(file_id: str) -> str:
         
         # Скачиваем файл
         file_url = f"https://api.telegram.org/file/bot{BOT_TOKEN}/{file_info.file_path}"
-        response = httpx.get(file_url)
+        async with AsyncClient() as client:
+            response = await client.get(file_url)
         response.raise_for_status()
-        
+
         with open(temp_file_path, 'wb') as f:
             f.write(response.content)
         
