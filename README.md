@@ -70,6 +70,7 @@ copy env.example .env
 # Telegram Bot
 BOT_TOKEN=your_bot_token_here
 ADMIN_CHAT_ID=your_admin_chat_id
+ADMIN_KEY=your_admin_key
 
 # OpenAI
 OPENAI_API_KEY=your_openai_api_key_here
