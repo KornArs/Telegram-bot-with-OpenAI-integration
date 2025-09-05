@@ -6,7 +6,7 @@ import threading
 from datetime import datetime
 from typing import Dict, List, Optional
 from flask import Flask, request, jsonify
-import httpx
+from httpx import AsyncClient
 from dotenv import load_dotenv
 from telegram import Bot, Update, Message, Document, Audio, Voice
 from telegram.ext import Application, MessageHandler, filters, PreCheckoutQueryHandler
@@ -21,6 +21,7 @@ load_dotenv()
 # Конфигурация
 BOT_TOKEN = os.getenv('BOT_TOKEN')
 ADMIN_CHAT_ID = int(os.getenv('ADMIN_CHAT_ID', 0))
+ADMIN_KEY = os.getenv('ADMIN_KEY')
 DEBOUNCE_SECONDS = int(os.getenv('DEBOUNCE_SECONDS', 6))
 MAX_WAIT_SECONDS = int(os.getenv('MAX_WAIT_SECONDS', 15))
 OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
@@ -28,7 +29,7 @@ PROVIDER_TOKEN = os.getenv('PROVIDER_TOKEN')
 
 # Инициализация компонентов
 app = Flask(__name__)
-debounce_manager = DebounceManager(DEBOUNCE_SECONDS)
+debounce_manager = DebounceManager(DEBOUNCE_SECONDS, MAX_WAIT_SECONDS)
 db_manager = DatabaseManager()
 openai_manager = OpenAIManager(OPENAI_API_KEY)
 bot = Bot(token=BOT_TOKEN)
@@ -85,12 +86,13 @@ async def send_voice_message_async(chat_id: int, audio_data: bytes, caption: str
             temp_file_path = temp_file.name
         
         # Отправляем голосовое сообщение
-        await bot.send_voice(
-            chat_id=chat_id,
-            voice=open(temp_file_path, 'rb'),
-            caption=caption
-        )
-        
+        with open(temp_file_path, 'rb') as voice_file:
+            await bot.send_voice(
+                chat_id=chat_id,
+                voice=voice_file,
+                caption=caption
+            )
+
         # Удаляем временный файл
         os.unlink(temp_file_path)
     except Exception as e:
@@ -145,9 +147,10 @@ async def download_file_async(file_id: str) -> str:
         
         # Скачиваем файл
         file_url = f"https://api.telegram.org/file/bot{BOT_TOKEN}/{file_info.file_path}"
-        response = httpx.get(file_url)
+        async with AsyncClient() as client:
+            response = await client.get(file_url)
         response.raise_for_status()
-        
+
         with open(temp_file_path, 'wb') as f:
             f.write(response.content)
         
@@ -572,7 +575,7 @@ def get_users():
     """Получает список пользователей (для админа)"""
     try:
         # Простая проверка авторизации
-        if request.headers.get('X-Admin-Key') != 'admin123':
+        if request.headers.get('X-Admin-Key') != ADMIN_KEY:
             return jsonify({"error": "Unauthorized"}), 401
         
         # Здесь можно добавить логику получения пользователей из БД

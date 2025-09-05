@@ -68,6 +68,7 @@
    ```bash
    heroku config:set BOT_TOKEN=your_token
    heroku config:set OPENAI_API_KEY=your_key
+   heroku config:set ADMIN_KEY=your_admin_key
    # ... остальные переменные
    ```
 4. **Добавьте Procfile**:
@@ -175,6 +176,7 @@ services:
       - BOT_TOKEN=${BOT_TOKEN}
       - OPENAI_API_KEY=${OPENAI_API_KEY}
       - ADMIN_CHAT_ID=${ADMIN_CHAT_ID}
+      - ADMIN_KEY=${ADMIN_KEY}
       - PROVIDER_TOKEN=${PROVIDER_TOKEN}
     volumes:
       - ./data:/app/data
