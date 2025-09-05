@@ -29,7 +29,7 @@
 
 1. **Добавьте remote origin**:
    ```bash
-   git remote add origin https://github.com/your-username/your-repo-name.git
+   git remote add origin https://github.com/KornArs/Telegram-bot-with-OpenAI-integration.git
    ```
 
 2. **Переименуйте ветку в main** (если нужно):
@@ -46,7 +46,7 @@
 
 ### 1. Обновите ссылки в файлах
 
-Замените `your-username/telegram-bot-openai` на реальные данные в:
+Обновите ссылки в файлах (уже выполнено):
 - `README.md`
 - `CONTRIBUTING.md`
 - `.github/workflows/ci.yml`

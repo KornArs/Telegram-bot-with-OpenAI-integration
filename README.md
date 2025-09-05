@@ -1,6 +1,6 @@
 # Telegram Bot с OpenAI и анализом Make.com сценариев
 
-[![CI/CD](https://github.com/your-username/telegram-bot-openai/workflows/CI/CD%20Pipeline/badge.svg)](https://github.com/your-username/telegram-bot-openai/actions)
+[![CI/CD](https://github.com/KornArs/Telegram-bot-with-OpenAI-integration/workflows/CI/CD%20Pipeline/badge.svg)](https://github.com/KornArs/Telegram-bot-with-OpenAI-integration/actions)
 [![Python](https://img.shields.io/badge/python-3.8%2B-blue.svg)](https://www.python.org/downloads/)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
@@ -41,8 +41,8 @@
 
 1. **Клонируйте репозиторий**
 ```bash
-git clone https://github.com/your-username/telegram-bot-openai.git
-cd telegram-bot-openai
+git clone https://github.com/KornArs/Telegram-bot-with-OpenAI-integration.git
+cd Telegram-bot-with-OpenAI-integration
 ```
 
 2. **Создайте виртуальное окружение**
@@ -298,7 +298,7 @@ docker run -p 5000:5000 telegram-bot
 
 ## 🤝 Поддержка
 
-Для вопросов и предложений создавайте [Issues](https://github.com/your-username/telegram-bot-openai/issues) в репозитории.
+Для вопросов и предложений создавайте [Issues](https://github.com/KornArs/Telegram-bot-with-OpenAI-integration/issues) в репозитории.
 
 ## 📄 Лицензия
 
@@ -310,7 +310,7 @@ docker run -p 5000:5000 telegram-bot
 
 ## 📊 Статистика
 
-![GitHub stars](https://img.shields.io/github/stars/your-username/telegram-bot-openai?style=social)
-![GitHub forks](https://img.shields.io/github/forks/your-username/telegram-bot-openai?style=social)
-![GitHub issues](https://img.shields.io/github/issues/your-username/telegram-bot-openai)
-![GitHub pull requests](https://img.shields.io/github/issues-pr/your-username/telegram-bot-openai)
+![GitHub stars](https://img.shields.io/github/stars/KornArs/Telegram-bot-with-OpenAI-integration?style=social)
+![GitHub forks](https://img.shields.io/github/forks/KornArs/Telegram-bot-with-OpenAI-integration?style=social)
+![GitHub issues](https://img.shields.io/github/issues/KornArs/Telegram-bot-with-OpenAI-integration)
+![GitHub pull requests](https://img.shields.io/github/issues-pr/KornArs/Telegram-bot-with-OpenAI-integration)

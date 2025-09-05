@@ -8,7 +8,7 @@
 
 Если вы нашли ошибку, пожалуйста:
 
-1. Проверьте, что ошибка еще не была зарегистрирована в [Issues](https://github.com/your-username/your-repo/issues)
+1. Проверьте, что ошибка еще не была зарегистрирована в [Issues](https://github.com/KornArs/Telegram-bot-with-OpenAI-integration/issues)
 2. Создайте новый issue с подробным описанием:
    - Описание проблемы
    - Шаги для воспроизведения
@@ -21,7 +21,7 @@
 
 Для предложений новых функций:
 
-1. Проверьте [Issues](https://github.com/your-username/your-repo/issues) на наличие похожих предложений
+1. Проверьте [Issues](https://github.com/KornArs/Telegram-bot-with-OpenAI-integration/issues) на наличие похожих предложений
 2. Создайте новый issue с тегом "enhancement"
 3. Опишите предлагаемую функцию и ее пользу
 
@@ -91,8 +91,8 @@ Closes #123
 
 1. **Клонируйте репозиторий**:
    ```bash
-   git clone https://github.com/your-username/your-repo.git
-   cd your-repo
+   git clone https://github.com/KornArs/Telegram-bot-with-OpenAI-integration.git
+   cd Telegram-bot-with-OpenAI-integration
    ```
 
 2. **Создайте виртуальное окружение**:
