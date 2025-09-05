@@ -629,8 +629,8 @@ async def handle_message(update: Update, context):
                     else:
                         await context.bot.send_message(chat_id=user_id, text=reply_text, parse_mode='HTML')
                 else:
-                                         # Для всех остальных случаев отвечаем текстом
-                     await context.bot.send_message(chat_id=user_id, text=reply_text, parse_mode='HTML')
+                    # Для всех остальных случаев отвечаем текстом
+                    await context.bot.send_message(chat_id=user_id, text=reply_text, parse_mode='HTML')
                      
                     
             elif response.get("action") == "offer_mentorship":
