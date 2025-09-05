@@ -85,12 +85,13 @@ async def send_voice_message_async(chat_id: int, audio_data: bytes, caption: str
             temp_file_path = temp_file.name
         
         # Отправляем голосовое сообщение
-        await bot.send_voice(
-            chat_id=chat_id,
-            voice=open(temp_file_path, 'rb'),
-            caption=caption
-        )
-        
+        with open(temp_file_path, 'rb') as voice_file:
+            await bot.send_voice(
+                chat_id=chat_id,
+                voice=voice_file,
+                caption=caption
+            )
+
         # Удаляем временный файл
         os.unlink(temp_file_path)
     except Exception as e:
