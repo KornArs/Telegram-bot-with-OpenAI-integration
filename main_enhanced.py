@@ -21,6 +21,7 @@ load_dotenv()
 # Конфигурация
 BOT_TOKEN = os.getenv('BOT_TOKEN')
 ADMIN_CHAT_ID = int(os.getenv('ADMIN_CHAT_ID', 0))
+ADMIN_KEY = os.getenv('ADMIN_KEY')
 DEBOUNCE_SECONDS = int(os.getenv('DEBOUNCE_SECONDS', 6))
 MAX_WAIT_SECONDS = int(os.getenv('MAX_WAIT_SECONDS', 15))
 OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
@@ -572,7 +573,7 @@ def get_users():
     """Получает список пользователей (для админа)"""
     try:
         # Простая проверка авторизации
-        if request.headers.get('X-Admin-Key') != 'admin123':
+        if request.headers.get('X-Admin-Key') != ADMIN_KEY:
             return jsonify({"error": "Unauthorized"}), 401
         
         # Здесь можно добавить логику получения пользователей из БД
