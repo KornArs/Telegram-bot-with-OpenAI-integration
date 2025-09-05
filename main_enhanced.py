@@ -28,7 +28,7 @@ PROVIDER_TOKEN = os.getenv('PROVIDER_TOKEN')
 
 # Инициализация компонентов
 app = Flask(__name__)
-debounce_manager = DebounceManager(DEBOUNCE_SECONDS)
+debounce_manager = DebounceManager(DEBOUNCE_SECONDS, MAX_WAIT_SECONDS)
 db_manager = DatabaseManager()
 openai_manager = OpenAIManager(OPENAI_API_KEY)
 bot = Bot(token=BOT_TOKEN)
